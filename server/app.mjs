@@ -1,12 +1,20 @@
 import express from "express";
+import dotenv from "dotenv";
+import { router as assignmentsRouter } from "./routes/assignments.mjs";
+
+dotenv.config();
 
 const app = express();
-const port = 4001;
+const PORT = process.env.PORT || 4000;
 
-app.get("/test", (req, res) => {
+app.use(express.json());
+
+app.get("/test", (_req, res) => {
   return res.json("Server API is working 🚀");
 });
 
-app.listen(port, () => {
-  console.log(`Server is running at ${port}`);
+app.use("/assignments", assignmentsRouter);
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });

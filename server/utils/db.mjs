@@ -1,10 +1,9 @@
-// Create PostgreSQL Connection Pool here !
 import * as pg from "pg";
-const { Pool } = pg.default;
+import dotenv from "dotenv";
+dotenv.config();
 
-const connectionPool = new Pool({
-  connectionString:
-    "postgresql://your-db-username:your-db-password@localhost:5432/your-db-name",
+const { Pool } = pg;
+
+export const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
 });
-
-export default connectionPool;
